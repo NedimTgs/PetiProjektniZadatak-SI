@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <title>Cat Img Generator</title>
+    <style>
+        img{
+            width: 50%;
+        }
+    </style>
+</head>
+<body class="jumbotron text-center">
+    <div align="center">
+    <h1>Cat Tumblr Img Generator</h1>
+    <button class="btn btn-primary my-2 generate_btn">Generate</button>
+</div>
+<br>
+<br>
+<br>
+    <div class="CatClass"></div>
+    <script>
+      let generate_btn = document.querySelector(".generate_btn");
+
+generate_btn.addEventListener("click", fetchpics);
+
+function fetchpics()
+{
+    fetch('https://api.thecatapi.com/v1/images/search')
+    .then(response => response.json())
+    .then((data) => {
+        let catUrl = data[0].url;
+        let catImgEl = document.createElement("img");
+        catImgEl.setAttribute('src', `${catUrl}`)
+        let CatClass = document.querySelector(".CatClass")
+        CatClass.appendChild(catImgEl)
+    })
+    .catch(err => console.log(err))
+}
+    </script>
+</body>
+</html>
